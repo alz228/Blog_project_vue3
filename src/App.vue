@@ -1,35 +1,22 @@
 <template>
   <div class="app">
-    <h4>Create a post</h4>
-    <form @submit.prevent>
-      <input
-        v-bind:value="title"
-        @input="title = $event.target.value"
-        class="input"
-        type="text"
-        placeholder="title"
-      />
-      <input
-        v-bind:value="body"
-        @input="body = $event.target.value"
-        class="input"
-        type="text"
-        placeholder="description"
-      />
-
-      <button class="btn" @click="createPost">create</button>
-    </form>
   
+  <post-form  @create="createPost"/>
 
-    <div class="post" v-for="post in posts">
-      <div><strong>Название:</strong> {{ post.title }}</div>
-      <div><strong>Описание:</strong> {{ post.body }}</div>
-    </div>
+  <!-- </post-form> -->
+<post-list :posts="posts"/>
+<!-- </post-list> -->
+   
   </div>
 </template>
 
 <script>
+import PostForm from './components/PostForm.vue';
+import PostList from './components/PostList.vue';
+
 export default {
+    components: {PostForm, PostList },
+
   data() {
     return {
       posts: [
@@ -40,14 +27,18 @@ export default {
     };
   },
   methods: {
-    createPost() {
+    createPost(post) {
       
-        const newPost = {
-            id: Date.now(),
-            title: this.title,
-            body: this.body,
-        }
-        this.posts.push(newPost)
+        this.posts.push(post);
+
+        // const newPost = {
+        //     id: Date.now(),
+        //     title: this.title,
+        //     body: this.body,
+        // }
+        // this.posts.push(newPost)
+        // this.title = ''
+        // this.body = ''
     },
     // inputTitle(event) {},
     // inputBody(event) {},
@@ -65,30 +56,6 @@ export default {
 .app {
   padding: 20px;
 }
-.post {
-  padding: 15px;
-  border: 2px solid teal;
-  margin-top: 15px;
-}
 
-.input {
-  width: 100%;
-  border: 0.5mm solid teal;
-  padding: 10px 15px;
-  margin-top: 15px;
-}
 
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.btn {
-  align-self: flex-end;
-  margin-top: 15px;
-  padding: 10px 15px;
-  background: none;
-  color: teal;
-  border: 1mm solid teal;
-}
 </style>
