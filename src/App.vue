@@ -4,7 +4,7 @@
   <post-form  @create="createPost"/>
 
   <!-- </post-form> -->
-<post-list :posts="posts"/>
+<post-list :posts="posts" @remove="removePost" />
 <!-- </post-list> -->
    
   </div>
@@ -39,6 +39,9 @@ export default {
         // this.posts.push(newPost)
         // this.title = ''
         // this.body = ''
+    },
+    removePost(post){
+      this.posts = this.posts.filter(p => p.id !== post.id)
     },
     // inputTitle(event) {},
     // inputBody(event) {},
