@@ -1,12 +1,13 @@
 <template>
-  <h4>Create a post</h4>
+  <h4 :style="{'color':'#1a1a1a'}">Create a post</h4>
   <form @submit.prevent>
-    <my-input v-focus v-model="post.title" type="text" placeholder="title" />
-    <my-input v-model="post.body" type="text" placeholder="description" />
+    <my-input :style="{'color': '#1a1a1a'}" v-focus v-model="post.title" type="text" placeholder="title" />
+    <my-input :style="{'color': '#1a1a1a'}" v-model="post.body" type="text" placeholder="description" />
 
     <my-button
       class="btn"
       @click="createPost"
+
       style="align-self: flex-end; margin-top: 15px"
       >create</my-button
     >
@@ -14,12 +15,9 @@
 </template>
 
 <script>
-// import MyButton from './UI/MyButton.vue'
-
+import toggleMixin from "@/mixins/toggleMixin";
 export default {
-  // components: {
-  //     MyButton
-  // },
+  mixins: [toggleMixin],
   data() {
     return {
       post: {
@@ -38,7 +36,8 @@ export default {
         body: "",
       };
 
-      // this.posts.push(newPost)
+      this.hideDialog()
+    
     },
   },
 };
