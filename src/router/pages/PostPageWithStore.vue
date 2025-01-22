@@ -2,7 +2,7 @@
   <div>
     <h1>Post Page</h1>
     <my-input
-    :style="{'background-color':'#1a1a1a'}"
+      :style="{ 'background-color': '#1a1a1a' }"
       v-focus
       :model-value="searchQuery"
       @update:model-value="setSearchQuery"
@@ -54,7 +54,7 @@ export default {
       setPage: "post/setPage",
       setSearchQuery: "post/setSearchQuery",
       setSelectedSort: "post/setSelectedSort",
-      setPosts: "post/setPosts"
+      setPosts: "post/setPosts",
     }),
     ...mapActions({
       loadMorePosts: "post/loadMorePosts",
@@ -66,10 +66,8 @@ export default {
     },
 
     removePost(post) {
-      // this.posts = this.posts.filter((p) => p.id !== post.id);
-
       const filteredPosts = this.posts.filter((p) => p.id !== post.id);
-  this.setPosts(filteredPosts); 
+      this.setPosts(filteredPosts);
     },
 
     showDialog() {
@@ -77,7 +75,11 @@ export default {
     },
   },
   mounted() {
-    this.fetchPosts();
+    if (this.posts.length === 0) {
+      this.fetchPosts();
+    } else {
+      console.log("Posts already loaded:", this.posts);
+    }
   },
   computed: {
     ...mapState({
@@ -123,6 +125,5 @@ export default {
 .observer {
   height: 1px;
   opacity: 0;
-  /* background-color: red; */
 }
 </style>

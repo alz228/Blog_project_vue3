@@ -9,8 +9,8 @@ export const postModule = {
     limit: 10,
     totalPages: 0,
     sortOptions: [
-      { value: "title", name: "po nazvaniu" },
-      { value: "body", name: "po sederzhaniu" },
+      { value: "title", name: "By title" },
+      { value: "body", name: "By description" },
     ],
   }),
   getters: {
@@ -64,12 +64,11 @@ export const postModule = {
         console.log(response);
 
         commit(
-          ("setTotalPages",
-          Math.ceil(response.headers["x-total-count"] / state.limit))
+          "setTotalPages",
+          Math.ceil(response.headers["x-total-count"] / state.limit)
         );
 
-        commit("setPosts, response.data");
-        // commit("setPosts", response.data);
+        commit("setPosts", response.data);
       } catch (e) {
         console.log(e);
       } finally {
@@ -101,7 +100,6 @@ export const postModule = {
       } catch (e) {
         console.log(e);
       } finally {
-        // this.isPostsLoading = false;
       }
     },
   },

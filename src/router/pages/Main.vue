@@ -33,11 +33,7 @@
     </ul>
 
     <div class="navbar__btns">
-      <!-- <my-button @click="$router.push('./posts')">blog</my-button> -->
-      <my-button
-        class="big-button"
-        @click="$router.push('/blog')"
-
+      <my-button class="big-button" @click="$router.push('/blog')"
         >Go to blog</my-button
       >
     </div>
@@ -78,11 +74,11 @@ li::marker {
   width: 180px;
   height: 40px;
   font-size: 18px;
-  /* text-align: center; */
+
   align-items: center;
   justify-content: center;
   display: flex;
-  /* justify-self: center; */
+
   margin-left: 20px;
   margin-top: 45px;
   transition: all 0.3s ease-in-out;
@@ -101,9 +97,7 @@ li::marker {
   }
 }
 
-/* Hover effect to pause animation */
 .big-button:hover {
   animation-play-state: paused;
-  /* background-color: #0056b3; */
 }
 </style>

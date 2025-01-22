@@ -28,10 +28,10 @@ export default {
 </script>
 
 <style scoped>
-.myselect{
+.myselect {
   background-color: #1a1a1a;
   color: #e3e3e3;
   border-radius: 8px;
-  border: .5px solid #e3e3e3;
+  border: 0.5px solid #e3e3e3;
 }
 </style>

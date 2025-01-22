@@ -23,11 +23,10 @@ export default {
 
 .app {
   padding: 20px;
-
 }
-body{
+body {
   background-color: #1a1a1a;
   color: #e3e3e3;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 </style>

@@ -10,10 +10,7 @@ const routes = [
     path: "/",
     component: Main,
   },
-//   {
-//     path: "/posts",
-//     component: UserPage,
-//   },
+
   {
     path: "/about",
     component: About,

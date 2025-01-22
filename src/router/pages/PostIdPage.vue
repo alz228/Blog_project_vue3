@@ -1,64 +1,72 @@
 <template>
   <div>
-    <p>Post № {{ postId }}</p>
     <h2>Post Details:</h2>
-    <div v-if="post">
-      <p><strong>Title:</strong> {{ post.title }}</p>
-      <p><strong>Description:</strong> {{ post.body }}</p>
-    </div>
-    <div v-else-if="posts.length === 0">
+    <p v-if="postId" style="margin-top: 30px">
+      Post id: <strong>{{ postId }}</strong>
+    </p>
+
+    <div v-if="isPostsLoading">
       <p>Loading post details...</p>
     </div>
+
+    <div v-else-if="post">
+      <p class="postpage__title">
+        Title:<strong>{{ post.title }}</strong>
+      </p>
+      <p class="postpage__description">
+        Description: <strong>{{ post.body }}</strong>
+      </p>
+    </div>
+
     <div v-else>
       <p>Post not found</p>
     </div>
-    <my-button @click="$router.push('/blog')" style="margin-left: 15px">Blog</my-button>
+
+    <my-button @click="$router.push('/blog')" style="margin-top: 15px"
+      >Back to blog</my-button
+    >
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions } from "vuex";
 
 export default {
   computed: {
     postId() {
       return Number(this.$route.params.id);
     },
-    ...mapState('postModule', ['posts']),
+    ...mapState("post", ["posts", "isPostsLoading"]),
     post() {
-      return this.posts && this.posts.length
-        ? this.posts.find((post) => post.id === this.postId)
-        : null;
+      if (!this.posts || !Array.isArray(this.posts)) {
+        return null;
+      }
+      return this.posts.find((post) => post.id === this.postId) || null;
     },
   },
   created() {
-    if (this.posts.length === 0) {
+    console.log("PostId from route:", this.postId);
+    console.log("Posts from Vuex:", this.posts);
+    if (!this.posts || !Array.isArray(this.posts) || this.posts.length === 0) {
       this.fetchPosts();
     }
   },
   methods: {
-    ...mapActions('postModule', ['fetchPosts']),
+    ...mapActions("post", ["fetchPosts"]),
   },
 };
 </script>
 
+<style scoped></style>
+
 <style scoped>
-/* h1 {
-  color: #333;
+.postpage__title {
+  font-weight: bold;
+  font-size: 28px;
+  margin-top: 15px;
 }
 
-p {
-  font-size: 18px;
+.postpage__description {
+  margin-top: 15px;
 }
-
-a {
-  display: inline-block;
-  margin-top: 20px;
-  color: #007bff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-} */
 </style>

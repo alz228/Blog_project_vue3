@@ -12,7 +12,6 @@
       <post-form @create="createPost" />
     </my-dialog>
 
-    <!-- </post-form> -->
     <post-list
       :posts="sortedAndSearchedPosts"
       @remove="removePost"
